@@ -1,0 +1,5 @@
+Spark es un framework de procesamiento distribuido.
+Spark es rápido y fácil de usar.
+Spark puede procesar datos en memoria.
+Spark tiene APIs para Java, Scala, Python y R.
+Spark incluye módulos para SQL, streaming, machine learning y procesamiento de grafos.
