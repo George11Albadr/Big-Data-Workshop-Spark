@@ -1,5 +1,3 @@
-
-
 services:
   spark-jupyter:
     build: .
