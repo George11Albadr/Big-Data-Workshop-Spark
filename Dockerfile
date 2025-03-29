@@ -12,33 +12,37 @@ RUN apt-get update && \
     && apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Configurar variables de entorno para Spark
+# Configurar variables de entorno de Spark
 ENV SPARK_HOME=/usr/local/spark
 ENV PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/lib/py4j-0.10.9-src.zip:$PYTHONPATH
 ENV PATH=$SPARK_HOME/bin:$PATH
 
-# Instalar paquetes Python adicionales
+# Instalar paquetes Python necesarios para análisis y Dash
 RUN pip install --no-cache-dir \
     findspark \
     matplotlib \
     seaborn \
     pandas \
     numpy \
-    scikit-learn
+    scikit-learn \
+    plotly \
+    dash==2.14.1 \
+    dash-table==5.0.0 \
+    dash-core-components==2.0.0 \
+    dash-html-components==2.0.0 \
+    scipy
 
-# Crear directorios para datos y notebooks (usando la ruta por defecto "work")
+# Crear directorios para datos y notebooks
 RUN mkdir -p /home/jovyan/work/data /home/jovyan/work/notebooks
-
-# Ajustar permisos
 RUN chown -R jovyan:users /home/jovyan/work
 
 USER jovyan
 
-# Exponer puertos para Jupyter (8888) y Spark UI (4040)
-EXPOSE 8888 4040
+# Exponer los puertos: Jupyter (8888), Spark UI (4040), Dash (8050)
+EXPOSE 8888 4040 8050
 
-# Crear un README de ejemplo
-RUN echo "# PySpark con JupyterLab\n\nEste contenedor incluye Apache Spark, JupyterLab y librerías básicas (Pandas, NumPy, Matplotlib, etc.).\n\nLos notebooks se almacenan en /home/jovyan/work/notebooks y los datos en /home/jovyan/work/data.\n" > /home/jovyan/work/README.md
+# Escribir un README simple
+RUN echo "# PySpark con JupyterLab y Dashboard en Dash" > /home/jovyan/work/README.md
 
-# Comando por defecto para iniciar Jupyter sin token ni contraseña
+# Comando por defecto para iniciar Jupyter sin token ni password
 CMD ["start-notebook.sh", "--NotebookApp.token=''", "--NotebookApp.password=''"]

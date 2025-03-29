@@ -5,7 +5,9 @@ services:
     ports:
       - "8888:8888"
       - "4040:4040"
+      - "8050:8050"
     volumes:
       - ./notebooks:/home/jovyan/work/notebooks
       - ./data:/home/jovyan/work/data
+      - ./dashboard.py:/home/jovyan/work/dashboard.py
     restart: unless-stopped
