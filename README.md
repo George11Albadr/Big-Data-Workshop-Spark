@@ -17,3 +17,6 @@ Este proyecto levanta un entorno Docker con Jupyter Notebook y PySpark.
 3. Desde la raíz del proyecto, levanta el entorno con:
    ```bash
    docker-compose up -d
+4. levantar la UI con el comando $ bash 
+(base) jovyan@01cddcc11d8b:~$ python /home/jovyan/work/dashboard.py
+en el bash del contenedor correspondiente.

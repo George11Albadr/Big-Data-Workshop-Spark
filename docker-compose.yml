@@ -1,6 +1,6 @@
 services:
   spark-jupyter:
-    build: .
+    image: spotify_spark  # Asegúrate de que este nombre coincida con el que usas al construir la imagen
     container_name: spark-jupyter
     ports:
       - "8888:8888"
