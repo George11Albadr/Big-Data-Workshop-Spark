@@ -54,6 +54,21 @@ def compute_diversity(df):
 # ----------------------------------------------------------------
 app = Dash(__name__)
 
+# Estilos comunes para inputs y dropdowns
+common_input_style = {
+    'color': '#080421',
+    'backgroundColor': '#f7f4f2',
+    'border': '1px solid #444444',
+    'fontSize': '12px'
+}
+
+filter_container_style = {
+        'backgroundColor' : '#111111',
+        'color' : "#FFFFFF",
+        "padding" : "20px",
+        'fontFamily' : 'Arial'
+}
+
 app.layout = html.Div(
     style={
         'backgroundColor': '#111111',
@@ -75,9 +90,9 @@ app.layout = html.Div(
                         options=[{'label': f"Cluster {i}", 'value': i} for i in range(5)],
                         value=0,
                         clearable=False,
-                        style={'width': '100px', 'fontSize': '12px'}
+                        style={**common_input_style, 'width': '100px'}
                     )
-                ], style={'flex': '1', 'minWidth': '120px', 'padding': '5px'}),
+                ], style=filter_container_style),
                 html.Div([
                     html.Label("Popularidad Mínima:", style={'fontWeight': 'bold', 'fontSize': '12px'}),
                     dcc.Input(
@@ -85,9 +100,9 @@ app.layout = html.Div(
                         type='number',
                         value=float(tracks_pd['popularity'].median()),
                         min=0, max=100, step=1,
-                        style={'width': '60px', 'fontSize': '12px'}
+                        style={**common_input_style, 'width': '60px'}
                     )
-                ], style={'flex': '1', 'minWidth': '120px', 'padding': '5px'}),
+                ], style=filter_container_style),
                 html.Div([
                     html.Label("Danceability Mínima:", style={'fontWeight': 'bold', 'fontSize': '12px'}),
                     dcc.Input(
@@ -95,9 +110,9 @@ app.layout = html.Div(
                         type='number',
                         value=float(tracks_pd['danceability'].median()),
                         min=0, max=1, step=0.01,
-                        style={'width': '60px', 'fontSize': '12px'}
+                        style={**common_input_style, 'width': '60px'}
                     )
-                ], style={'flex': '1', 'minWidth': '120px', 'padding': '5px'}),
+                ], style=filter_container_style),
                 html.Div([
                     html.Label("Década:", style={'fontWeight': 'bold', 'fontSize': '12px'}),
                     dcc.Dropdown(
@@ -106,9 +121,9 @@ app.layout = html.Div(
                         placeholder="Todas",
                         multi=False,
                         clearable=True,
-                        style={'width': '100px', 'fontSize': '12px'}
+                        style={**common_input_style, 'width': '100px'}
                     )
-                ], style={'flex': '1', 'minWidth': '120px', 'padding': '5px'}),
+                ], style=filter_container_style),
                 html.Div([
                     html.Label("Métrica Histograma:", style={'fontWeight': 'bold', 'fontSize': '12px'}),
                     dcc.Dropdown(
@@ -116,9 +131,9 @@ app.layout = html.Div(
                         options=[{'label': m.capitalize(), 'value': m} for m in metrics],
                         value='valence',
                         clearable=False,
-                        style={'width': '140px', 'fontSize': '12px'}
+                        style={**common_input_style, 'width': '140px'}
                     )
-                ], style={'flex': '1', 'minWidth': '140px', 'padding': '5px'}),
+                ], style=filter_container_style),
                 html.Div([
                     html.Label("Métrica Box Plot:", style={'fontWeight': 'bold', 'fontSize': '12px'}),
                     dcc.Dropdown(
@@ -126,9 +141,9 @@ app.layout = html.Div(
                         options=[{'label': m.capitalize(), 'value': m} for m in metrics],
                         value='acousticness',
                         clearable=False,
-                        style={'width': '140px', 'fontSize': '12px'}
+                        style={**common_input_style, 'width': '140px'}
                     )
-                ], style={'flex': '1', 'minWidth': '140px', 'padding': '5px'})
+                ], style=filter_container_style)
             ]
         ),
         
